@@ -1,3 +1,5 @@
+<p align="center"><img src="assets/logo.png" alt="EzerPhone" width="260"></p>
+
 # EzerPhone
 
 A hand-drawn SIP softphone for iPhone: sepia ink on parchment, built with SwiftUI on the
