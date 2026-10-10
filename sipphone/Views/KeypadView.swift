@@ -34,11 +34,10 @@ struct KeypadView: View {
             Button {
                 coordinator.placeCall(dialString, accountId: settings.selectedAccountId)
             } label: {
-                InkSunburstFace(diameter: 84, glyph: .handset)
+                InkMascotCallFace(diameter: 92)
             }
             .buttonStyle(InkPressStyle())
             .disabled(!canCall)
-            .opacity(canCall ? 1 : 0.35)
             .accessibilityLabel("Позвонить")
             .padding(.bottom, 4)
 
@@ -134,13 +133,13 @@ struct DialPad: View {
     @Binding var dialString: String
 
     var body: some View {
-        DialGrid(onKey: appendDigit, onZeroLongPress: { dialString.append("+") })
+        DialGrid(onKey: appendDigit, onZeroLongPress: { dialString.append(dialString.isEmpty ? "+" : "0") })
     }
 
-    /// Typing "0" right after "0" collapses to "+", matching the long-press
-    /// shortcut — same convention as the stock Phone app's dial pad.
+    /// "00" at the very start of a number becomes "+" (international prefix), matching the
+    /// long-press shortcut. Anywhere later zeros are just zeros: "8001" must stay "8001".
     private func appendDigit(_ digit: String) {
-        if digit == "0", dialString.hasSuffix("0") {
+        if digit == "0", dialString == "0" {
             dialString.removeLast()
             dialString.append("+")
         } else {

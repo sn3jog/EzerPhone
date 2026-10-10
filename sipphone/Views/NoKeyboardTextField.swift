@@ -52,8 +52,17 @@ struct NoKeyboardTextField: UIViewRepresentable {
 }
 
 extension String {
+    /// Digits, * and #, plus a "+" only as the very first character.
     var dialSanitized: String {
-        filter { $0.isNumber || $0 == "+" || $0 == "*" || $0 == "#" }
+        var result = ""
+        for ch in self {
+            if ch.isNumber || ch == "*" || ch == "#" {
+                result.append(ch)
+            } else if ch == "+", result.isEmpty {
+                result.append(ch)
+            }
+        }
+        return result
     }
 }
 
