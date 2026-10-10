@@ -60,15 +60,15 @@ struct ContactsView: View {
 
     private func sync() {
         Task {
-            syncMessage = "Синхронизация…"
+            syncMessage = tr("Синхронизация…")
             let result = await store.syncFromDevice()
             switch result {
             case .success(let count):
-                syncMessage = "Синхронизировано: \(count)"
+                syncMessage = tr("Синхронизировано: %d", count)
             case .failure(.denied):
-                syncMessage = "Нет доступа к контактам — разрешите в Настройках iOS"
+                syncMessage = tr("Нет доступа к контактам — разрешите в Настройках iOS")
             case .failure(.failed(let error)):
-                syncMessage = "Ошибка: \(error.localizedDescription)"
+                syncMessage = tr("Ошибка: %@", error.localizedDescription)
             }
         }
     }

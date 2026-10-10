@@ -71,6 +71,7 @@ struct KeypadView: View {
             InkRule(double: true, seed: 17)
         }
         .padding(.horizontal, 22)
+        .environment(\.layoutDirection, .leftToRight)
     }
 
     private var accountPicker: some View {
@@ -112,6 +113,7 @@ struct DialGrid: View {
     ]
 
     var body: some View {
+        // A phone keypad is 1-2-3 left to right in every language.
         VStack(spacing: 8) {
             ForEach(rows.indices, id: \.self) { r in
                 HStack(spacing: 10) {
@@ -126,6 +128,7 @@ struct DialGrid: View {
                 }
             }
         }
+        .environment(\.layoutDirection, .leftToRight)
     }
 }
 
@@ -174,7 +177,7 @@ struct DialPadButton: View {
         .frame(width: 78, height: 78)
         .contentShape(Circle())
         .accessibilityElement(children: .ignore)
-        .accessibilityLabel(digit == "*" ? "Звёздочка" : digit == "#" ? "Решётка" : digit)
+        .accessibilityLabel(digit == "*" ? tr("Звёздочка") : digit == "#" ? tr("Решётка") : digit)
         .accessibilityAddTraits(.isButton)
         .onLongPressGesture(minimumDuration: 0.45, pressing: { pressing in
             isPressed = pressing

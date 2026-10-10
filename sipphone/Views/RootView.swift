@@ -4,6 +4,7 @@ struct RootView: View {
     @EnvironmentObject var settings: SipSettings
     @EnvironmentObject var linphone: LinphoneManager
     @ObservedObject private var provisioning = ProvisioningService.shared
+    @ObservedObject private var language = AppLanguage.shared
 
     private enum Tab: Hashable {
         case favorites, recents, contacts, keypad, settings
@@ -25,10 +26,13 @@ struct RootView: View {
                 case .settings: SettingsView()
                 }
             }
+            .id(language.choice)
             .frame(maxWidth: .infinity, maxHeight: .infinity)
 
             customTabBar
         }
+        .environment(\.locale, language.locale)
+        .environment(\.layoutDirection, language.layoutDirection)
         .inkPaper()
         .fullScreenCover(isPresented: Binding(
             get: { linphone.activeCallRemote != nil },
@@ -92,7 +96,7 @@ struct RootView: View {
                     icon()
                 }
                 .frame(width: 40, height: 40)
-                Text(label)
+                Text(tr(label))
                     .font(.ink(10.5, selected ? .bold : .regular, relativeTo: .caption2))
                     .lineLimit(1)
                     .minimumScaleFactor(0.8)
@@ -102,7 +106,7 @@ struct RootView: View {
             .contentShape(Rectangle())
         }
         .buttonStyle(.plain)
-        .accessibilityLabel(label)
+        .accessibilityLabel(tr(label))
         .accessibilityAddTraits(selected ? .isSelected : [])
     }
 
@@ -117,11 +121,11 @@ struct RootView: View {
 
     private var statusText: String {
         switch linphone.registrationState {
-        case .ok: return "Зарегистрирован"
-        case .progress: return "Регистрация…"
-        case .failed: return "Ошибка: \(linphone.registrationError ?? "")"
-        case .cleared: return "Отключено"
-        case .none: return "Не настроено"
+        case .ok: return tr("Зарегистрирован")
+        case .progress: return tr("Регистрация…")
+        case .failed: return tr("Ошибка: %@", linphone.registrationError ?? "")
+        case .cleared: return tr("Отключено")
+        case .none: return tr("Не настроено")
         }
     }
 }

@@ -1,0 +1,3 @@
+"NSMicrophoneUsageDescription" = "Balss zvaniem pa SIP ir nepieciešama piekļuve mikrofonam.";
+"NSLocalNetworkUsageDescription" = "Lietotne sazinās ar SIP telefonijas serveri jūsu tīklā.";
+"NSContactsUsageDescription" = "Piekļuve kontaktiem ir vajadzīga, lai tos sinhronizētu zvaniem.";

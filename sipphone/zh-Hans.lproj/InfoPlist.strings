@@ -1,0 +1,3 @@
+"NSMicrophoneUsageDescription" = "通过 SIP 进行语音通话需要访问麦克风。";
+"NSLocalNetworkUsageDescription" = "本应用会连接您网络中的 SIP 电话服务器。";
+"NSContactsUsageDescription" = "需要访问联系人，以便同步后用于拨号。";

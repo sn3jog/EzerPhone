@@ -1,6 +1,18 @@
 import SwiftUI
 import UIKit
 
+// MARK: - Localisation
+
+/// Russian is the source language and doubles as the lookup key; the English table is
+/// `en.lproj/Localizable.strings`. SwiftUI text built from a literal localises by itself;
+/// anything passed around as a `String` goes through `tr`.
+func tr(_ key: String) -> String {
+    AppLanguage.shared.bundle.localizedString(forKey: key, value: nil, table: nil)
+}
+func tr(_ key: String, _ args: CVarArg...) -> String {
+    String(format: tr(key), locale: AppLanguage.shared.locale, arguments: args)
+}
+
 // MARK: - Palette and type
 
 /// The whole app is two inks on paper, taken straight from the logo: sepia ink
@@ -500,7 +512,7 @@ struct InkScreenHeader<Leading: View, Trailing: View>: View {
             ZStack(alignment: .leading) { trailing.hidden(); leading }.fixedSize()
             WobblyLine(seed: 3, amplitude: 0.7).stroke(Ink.ink, style: inkStroke(1.2)).frame(height: 4)
             Diamond().fill(Ink.ink).frame(width: 8, height: 8)
-            Text(title.uppercased())
+            Text(tr(title).uppercased())
                 .font(.ink(14, .bold, relativeTo: .subheadline))
                 .kerning(3)
                 .lineLimit(1)
@@ -516,7 +528,7 @@ struct InkScreenHeader<Leading: View, Trailing: View>: View {
     private var compactRow: some View {
         HStack(spacing: 8) {
             ZStack(alignment: .leading) { trailing.hidden(); leading }.fixedSize()
-            Text(title.uppercased())
+            Text(tr(title).uppercased())
                 .font(.ink(14, .bold, relativeTo: .subheadline))
                 .kerning(1.5)
                 .lineLimit(1)
@@ -637,7 +649,7 @@ struct InkEmptyState: View {
                 WobblyLine(seed: 15).stroke(Ink.ink, style: inkStroke(1)).frame(height: 4)
             }
             .frame(width: 130)
-            Text(text)
+            Text(tr(text))
                 .font(.ink(15, .italic, relativeTo: .callout))
                 .multilineTextAlignment(.center)
         }
@@ -672,7 +684,7 @@ struct InkIconButton: View {
                 .contentShape(Rectangle())
         }
         .buttonStyle(InkPressStyle())
-        .accessibilityLabel(label)
+        .accessibilityLabel(tr(label))
     }
 }
 
@@ -685,7 +697,7 @@ struct InkTextButton: View {
     var body: some View {
         Button(action: action) {
             VStack(spacing: 0) {
-                Text(title)
+                Text(tr(title))
                     .font(.ink(15, bold ? .boldItalic : .italic, relativeTo: .callout))
                     .foregroundStyle(Ink.ink)
                     .fixedSize()
@@ -711,7 +723,7 @@ struct InkWideButton: View {
         Button(action: action) {
             HStack(spacing: 8) {
                 if let glyph { InkGlyphView(glyph: glyph, size: 18) }
-                Text(title).font(.ink(16, .bold, relativeTo: .callout))
+                Text(tr(title)).font(.ink(16, .bold, relativeTo: .callout))
             }
             .foregroundStyle(Ink.ink)
             .frame(maxWidth: .infinity, minHeight: 48)
@@ -780,8 +792,8 @@ struct InkSwitchButton: View {
             InkSwitch(isOn: isOn).frame(minHeight: 44).contentShape(Rectangle())
         }
         .buttonStyle(.plain)
-        .accessibilityLabel(label)
-        .accessibilityValue(isOn ? "включено" : "выключено")
+        .accessibilityLabel(tr(label))
+        .accessibilityValue(tr(isOn ? "включено" : "выключено"))
         .inkToggleTrait()
     }
 }
@@ -793,7 +805,7 @@ struct InkToggleRow: View {
 
     var body: some View {
         HStack(spacing: 12) {
-            Text(title)
+            Text(tr(title))
                 .font(.ink(16, .regular, relativeTo: .body))
                 .foregroundStyle(Ink.ink)
                 .frame(maxWidth: .infinity, alignment: .leading)
@@ -822,7 +834,7 @@ struct InkSection<Content: View>: View {
     var body: some View {
         VStack(alignment: .leading, spacing: 8) {
             if let title {
-                Text(title.uppercased())
+                Text(tr(title).uppercased())
                     .font(.ink(12, .bold, relativeTo: .caption))
                     .kerning(2)
                     .foregroundStyle(Ink.ink)
@@ -834,7 +846,7 @@ struct InkSection<Content: View>: View {
                 .padding(.vertical, 6)
                 .background(InkBox(radius: 14, seed: InkSeed.of(title ?? "section"), lineWidth: 2.2, innerRing: true))
             if let footer {
-                Text(footer)
+                Text(tr(footer))
                     .font(.ink(12, .italic, relativeTo: .footnote))
                     .foregroundStyle(Ink.faded)
                     .padding(.horizontal, 8)
@@ -852,7 +864,7 @@ struct InkField: View {
 
     var body: some View {
         VStack(alignment: .leading, spacing: 1) {
-            Text(title)
+            Text(tr(title))
                 .font(.ink(12, .italic, relativeTo: .caption))
                 .foregroundStyle(Ink.faded)
             Group {

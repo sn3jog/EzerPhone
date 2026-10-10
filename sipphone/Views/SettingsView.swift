@@ -12,6 +12,7 @@ struct SettingsView: View {
     @State private var editingAccount: EditingAccountRef?
     @State private var pendingDelete: EditingAccountRef?
     @State private var isReordering = false
+    @ObservedObject private var language = AppLanguage.shared
 
     var body: some View {
         VStack(spacing: 0) {
@@ -31,6 +32,14 @@ struct SettingsView: View {
                             InkRule(seed: InkSeed.of(account.id.uuidString))
                         }
                         addButton
+                    }
+
+                    InkSection("Язык") {
+                        languageRow(.system, title: "Как в системе")
+                        ForEach([AppLanguage.Choice.ru, .en, .de, .es, .he, .ar, .lv, .lt, .et, .zh, .ko, .ja], id: \.rawValue) { choice in
+                            InkRule(seed: InkSeed.of(choice.rawValue))
+                            languageRow(choice, title: choice.nativeName, verbatim: true)
+                        }
                     }
                 }
                 .padding(.horizontal, 16)
@@ -73,10 +82,7 @@ struct SettingsView: View {
     }
 
     private var footerText: String {
-        "Верхний аккаунт — по умолчанию для звонков; нажмите на значок слева, чтобы сделать аккаунт основным, "
-        + "стрелки рядом переставляют аккаунты, а «Изменить» открывает удаление. Закрашенный значок — зарегистрирован, "
-        + "штриховка — идёт регистрация, крест — ошибка, пустой — неактивен; двойное кольцо — аккаунт по умолчанию. "
-        + "Переключатель справа включает и выключает аккаунт. Доступ (стук) и VPN настраиваются внутри аккаунта."
+        "Верхний аккаунт — по умолчанию для звонков; нажмите на значок слева, чтобы сделать аккаунт основным, стрелки рядом переставляют аккаунты, а «Изменить» открывает удаление. Закрашенный значок — зарегистрирован, штриховка — идёт регистрация, крест — ошибка, пустой — неактивен; двойное кольцо — аккаунт по умолчанию. Переключатель справа включает и выключает аккаунт. Доступ (стук) и VPN настраиваются внутри аккаунта."
     }
 
     private func enabledBinding(_ id: UUID) -> Binding<Bool> {
@@ -120,11 +126,11 @@ struct SettingsView: View {
             .buttonStyle(.plain)
 
             VStack(spacing: 0) {
-                InkIconButton(glyph: .chevronUp, label: "Выше: \(value.displayName)", size: 20) { move(index, by: -1) }
+                InkIconButton(glyph: .chevronUp, label: tr("Выше: %@", value.displayName), size: 20) { move(index, by: -1) }
                     .frame(width: 40, height: 28)
                     .opacity(index == 0 ? 0.25 : 1)
                     .disabled(index == 0)
-                InkIconButton(glyph: .chevronDown, label: "Ниже: \(value.displayName)", size: 20) { move(index, by: 1) }
+                InkIconButton(glyph: .chevronDown, label: tr("Ниже: %@", value.displayName), size: 20) { move(index, by: 1) }
                     .frame(width: 40, height: 28)
                     .opacity(index == settings.accounts.count - 1 ? 0.25 : 1)
                     .disabled(index == settings.accounts.count - 1)
@@ -135,10 +141,30 @@ struct SettingsView: View {
                     pendingDelete = EditingAccountRef(id: value.id)
                 }
             } else {
-                InkSwitchButton(isOn: enabledBinding(value.id), label: "Включить \(value.displayName)")
+                InkSwitchButton(isOn: enabledBinding(value.id), label: tr("Включить %@", value.displayName))
             }
         }
         .padding(.vertical, 4)
+    }
+
+    private func languageRow(_ choice: AppLanguage.Choice, title: String, verbatim: Bool = false) -> some View {
+        Button {
+            language.choice = choice
+            Haptics.tap()
+        } label: {
+            HStack(spacing: 12) {
+                InkStatusMark(kind: language.choice == choice ? .registered : .inactive, size: 24)
+                Text(verbatim ? title : tr(title))
+                    .font(.ink(16, .regular, relativeTo: .body))
+                    .foregroundStyle(Ink.ink)
+                    .frame(maxWidth: .infinity, alignment: .leading)
+            }
+            .padding(.vertical, 8)
+            .frame(minHeight: 44)
+            .contentShape(Rectangle())
+        }
+        .buttonStyle(.plain)
+        .accessibilityAddTraits(language.choice == choice ? .isSelected : [])
     }
 
     private var addButton: some View {

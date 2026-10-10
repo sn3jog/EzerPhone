@@ -64,12 +64,12 @@ final class ProvisioningService: ObservableObject {
                 apply(config)
                 state = .done(config.label.isEmpty ? config.username : config.label)
             case 410:
-                state = .failed("Ссылка устарела. Попросите прислать новую.")
+                state = .failed(tr("Ссылка устарела. Попросите прислать новую."))
             default:
-                state = .failed("Ссылка уже использована или неверна. Попросите прислать новую.")
+                state = .failed(tr("Ссылка уже использована или неверна. Попросите прислать новую."))
             }
         } catch {
-            state = .failed("Не удалось связаться с сервером. Проверьте интернет и нажмите на ссылку ещё раз.")
+            state = .failed(tr("Не удалось связаться с сервером. Проверьте интернет и нажмите на ссылку ещё раз."))
         }
     }
 

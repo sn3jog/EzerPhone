@@ -45,7 +45,7 @@ struct CallView: View {
                     .padding(.horizontal, 24)
                 HStack(spacing: 8) {
                     Diamond().fill(Ink.ink).frame(width: 7, height: 7)
-                    Text(linphone.activeCallIsIncoming ? "Входящий вызов" : "Исходящий вызов")
+                    Text(tr(linphone.activeCallIsIncoming ? "Входящий вызов" : "Исходящий вызов"))
                         .font(.ink(16, .italic, relativeTo: .callout))
                         .foregroundStyle(Ink.faded)
                     Diamond().fill(Ink.ink).frame(width: 7, height: 7)
@@ -154,7 +154,7 @@ private struct CallButton: View {
             .contentShape(Circle())
         }
         .buttonStyle(.plain)
-        .accessibilityLabel(label)
+        .accessibilityLabel(tr(label))
     }
 }
 

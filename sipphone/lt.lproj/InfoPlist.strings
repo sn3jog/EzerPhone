@@ -1,0 +1,3 @@
+"NSMicrophoneUsageDescription" = "Balso skambučiams per SIP reikia prieigos prie mikrofono.";
+"NSLocalNetworkUsageDescription" = "Programa jungiasi prie SIP telefonijos serverio jūsų tinkle.";
+"NSContactsUsageDescription" = "Reikia prieigos prie kontaktų, kad juos būtų galima sinchronizuoti skambučiams.";

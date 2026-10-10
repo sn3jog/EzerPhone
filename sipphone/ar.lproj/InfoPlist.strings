@@ -1,0 +1,3 @@
+"NSMicrophoneUsageDescription" = "يلزم الوصول إلى الميكروفون للمكالمات الصوتية عبر SIP.";
+"NSLocalNetworkUsageDescription" = "يتصل التطبيق بخادم اتصالات SIP على شبكتك.";
+"NSContactsUsageDescription" = "يلزم الوصول إلى جهات الاتصال لمزامنتها من أجل الاتصال.";

@@ -4,7 +4,9 @@
 
 A hand-drawn SIP softphone for iPhone: sepia ink on parchment, built with SwiftUI on the
 Linphone SDK and CallKit. Several accounts, per-account SRTP, an in-call keypad for voice
-menus, and one-tap account setup from a link.
+menus, and one-tap account setup from a link. Available in Russian, English, German,
+Spanish, Hebrew, Arabic, Latvian, Lithuanian, Estonian, Chinese (Simplified), Korean and
+Japanese, switchable in Settings.
 
 Requires iOS 15 or later.
 

@@ -1,0 +1,3 @@
+"NSMicrophoneUsageDescription" = "Microphone access is needed for voice calls over SIP.";
+"NSLocalNetworkUsageDescription" = "The app talks to the SIP telephony server on your network.";
+"NSContactsUsageDescription" = "Contacts access is needed to sync them for calling.";

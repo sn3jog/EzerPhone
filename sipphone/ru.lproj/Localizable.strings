@@ -1,0 +1,2 @@
+/* Russian is the source language: each key is already the Russian text.
+   This file only has to exist so iOS offers Russian as an app language. */

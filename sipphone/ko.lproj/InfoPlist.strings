@@ -1,0 +1,3 @@
+"NSMicrophoneUsageDescription" = "SIP를 통한 음성 통화에는 마이크 접근 권한이 필요합니다.";
+"NSLocalNetworkUsageDescription" = "앱이 사용자 네트워크의 SIP 전화 서버와 통신합니다.";
+"NSContactsUsageDescription" = "통화를 위해 연락처를 동기화하려면 연락처 접근 권한이 필요합니다.";

@@ -1,0 +1,3 @@
+"NSMicrophoneUsageDescription" = "SIPによる音声通話にはマイクへのアクセスが必要です。";
+"NSLocalNetworkUsageDescription" = "アプリはネットワーク上のSIP電話サーバーと通信します。";
+"NSContactsUsageDescription" = "発信のために連絡先を同期するには、連絡先へのアクセスが必要です。";

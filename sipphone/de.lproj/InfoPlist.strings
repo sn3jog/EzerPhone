@@ -1,0 +1,3 @@
+"NSMicrophoneUsageDescription" = "Der Zugriff auf das Mikrofon wird für Sprachanrufe über SIP benötigt.";
+"NSLocalNetworkUsageDescription" = "Die App kommuniziert mit dem SIP-Telefonieserver in Ihrem Netzwerk.";
+"NSContactsUsageDescription" = "Der Zugriff auf Kontakte wird benötigt, um sie für Anrufe zu synchronisieren.";

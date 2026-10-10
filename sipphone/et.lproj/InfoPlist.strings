@@ -1,0 +1,3 @@
+"NSMicrophoneUsageDescription" = "SIP-häälkõnede jaoks on vaja mikrofoni juurdepääsu.";
+"NSLocalNetworkUsageDescription" = "Rakendus suhtleb teie võrgus oleva SIP-telefoniserveriga.";
+"NSContactsUsageDescription" = "Kontaktidele juurdepääs on vajalik, et neid helistamiseks sünkroonida.";

@@ -1,0 +1,3 @@
+"NSMicrophoneUsageDescription" = "Нужен доступ к микрофону для голосовых звонков через SIP.";
+"NSLocalNetworkUsageDescription" = "Приложение обращается к серверу SIP-телефонии в вашей сети.";
+"NSContactsUsageDescription" = "Нужен доступ к контактам, чтобы синхронизировать их для звонков.";

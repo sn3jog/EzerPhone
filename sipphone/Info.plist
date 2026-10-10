@@ -4,6 +4,21 @@
 <dict>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
+	<key>CFBundleLocalizations</key>
+	<array>
+		<string>en</string>
+		<string>ru</string>
+		<string>de</string>
+		<string>zh-Hans</string>
+		<string>ko</string>
+		<string>ja</string>
+		<string>es</string>
+		<string>lv</string>
+		<string>lt</string>
+		<string>et</string>
+		<string>he</string>
+		<string>ar</string>
+	</array>
 	<key>CFBundleDisplayName</key>
 	<string>EzerPhone</string>
 	<key>CFBundleExecutable</key>
@@ -53,10 +68,10 @@
 		<string>audio</string>
 	</array>
 	<key>NSMicrophoneUsageDescription</key>
-	<string>Нужен доступ к микрофону для голосовых звонков через SIP.</string>
+	<string>Microphone access is needed for voice calls over SIP.</string>
 	<key>NSLocalNetworkUsageDescription</key>
-	<string>Приложение обращается к серверу SIP-телефонии в вашей сети.</string>
+	<string>The app talks to the SIP telephony server on your network.</string>
 	<key>NSContactsUsageDescription</key>
-	<string>Нужен доступ к контактам, чтобы синхронизировать их для звонков.</string>
+	<string>Contacts access is needed to sync them for calling.</string>
 </dict>
 </plist>
