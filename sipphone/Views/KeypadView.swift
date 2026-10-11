@@ -34,7 +34,7 @@ struct KeypadView: View {
             Button {
                 coordinator.placeCall(dialString, accountId: settings.selectedAccountId)
             } label: {
-                InkMascotCallFace(diameter: 92)
+                InkSunburstFace(diameter: 84, glyph: .handset)
             }
             .buttonStyle(InkPressStyle())
             .disabled(!canCall)

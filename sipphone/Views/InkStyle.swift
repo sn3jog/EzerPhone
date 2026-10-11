@@ -420,39 +420,6 @@ struct InkSunburstFace: View {
     }
 }
 
-/// The "call" button: the mascot in an inked medallion with a hatched shadow, and a
-/// small handset badge so the button still reads as "call" without a label.
-struct InkMascotCallFace: View {
-    var diameter: CGFloat = 92
-
-    var body: some View {
-        // Show the head, the whole beard, the phone and the raised hand: the middle
-        // 720 px of the 930 px artwork, shifted a little downwards.
-        let medallion = diameter * 0.80
-        let k = medallion / 720
-        ZStack {
-            InkDisc(diameter: diameter, seed: 811, lineWidth: 3)
-            Image("Logo")
-                .resizable()
-                .interpolation(.high)
-                .frame(width: 930 * k, height: 930 * k)
-                .offset(x: -5 * k, y: 75 * k)
-                .frame(width: medallion, height: medallion)
-                .clipShape(Circle())
-                .overlay(WobblyCircle(seed: 812, amplitude: 0.6, inset: 1).stroke(Ink.ink, style: inkStroke(2.4)))
-            ZStack {
-                Circle().fill(Ink.ink)
-                InkGlyphView(glyph: .handset, size: diameter * 0.22, color: Ink.paper)
-            }
-            .frame(width: diameter * 0.32, height: diameter * 0.32)
-            .overlay(Circle().stroke(Ink.paper, lineWidth: 2))
-            .offset(x: diameter * 0.36, y: diameter * 0.36)
-        }
-        .frame(width: diameter + 6, height: diameter + 6)
-        .accessibilityHidden(true)
-    }
-}
-
 /// A hand-ruled line; `double` adds the thin twin the logo's rings have.
 struct InkRule: View {
     var double = false
