@@ -5,6 +5,7 @@ struct RootView: View {
     @EnvironmentObject var linphone: LinphoneManager
     @ObservedObject private var provisioning = ProvisioningService.shared
     @ObservedObject private var language = AppLanguage.shared
+    @ObservedObject private var theme = AppTheme.shared
 
     private enum Tab: Hashable {
         case favorites, recents, contacts, keypad, settings
@@ -31,6 +32,8 @@ struct RootView: View {
 
             customTabBar
         }
+        // The palette is read through `Ink`, not the environment, so a new look needs a rebuild.
+        .id(theme.choice)
         .environment(\.locale, language.locale)
         .environment(\.layoutDirection, language.layoutDirection)
         .inkPaper()
@@ -89,7 +92,7 @@ struct RootView: View {
         } label: {
             VStack(spacing: 2) {
                 ZStack {
-                    if selected {
+                    if selected && !Ink.classic {
                         WobblyCircle(seed: 61, amplitude: 0.6, inset: 2).stroke(Ink.ink, lineWidth: 1.8)
                         WobblyCircle(seed: 62, amplitude: 0.5, inset: 5.4).stroke(Ink.ink, lineWidth: 0.8)
                     }
@@ -101,7 +104,7 @@ struct RootView: View {
                     .lineLimit(1)
                     .minimumScaleFactor(0.8)
             }
-            .foregroundStyle(Ink.ink.opacity(selected ? 1 : 0.6))
+            .foregroundStyle(Ink.classic ? (selected ? Ink.accent : Ink.faded) : Ink.ink.opacity(selected ? 1 : 0.6))
             .frame(maxWidth: .infinity)
             .contentShape(Rectangle())
         }

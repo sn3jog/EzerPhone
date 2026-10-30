@@ -18,12 +18,30 @@ func tr(_ key: String, _ args: CVarArg...) -> String {
 /// The whole app is two inks on paper, taken straight from the logo: sepia ink
 /// `#2b2118` on parchment `#f7f1e2`. Anything in between is the same ink at a
 /// lower opacity — there are no other colours.
+///
+/// The classic themes (see `AppTheme`) swap these for the system's own colours, so
+/// every screen follows the choice without knowing about it.
 enum Ink {
-    static let paper = Color(red: 247.0 / 255, green: 241.0 / 255, blue: 226.0 / 255)
-    static let ink = Color(red: 43.0 / 255, green: 33.0 / 255, blue: 24.0 / 255)
-    static let paperUI = UIColor(red: 247.0 / 255, green: 241.0 / 255, blue: 226.0 / 255, alpha: 1)
-    static let inkUI = UIColor(red: 43.0 / 255, green: 33.0 / 255, blue: 24.0 / 255, alpha: 1)
-    static let faded = ink.opacity(0.62)
+    static var classic: Bool { AppTheme.shared.isClassic }
+
+    static var paper: Color { Color(paperUI) }
+    static var ink: Color { Color(inkUI) }
+    static var paperUI: UIColor {
+        classic ? .systemBackground : UIColor(red: 247.0 / 255, green: 241.0 / 255, blue: 226.0 / 255, alpha: 1)
+    }
+    static var inkUI: UIColor {
+        classic ? .label : UIColor(red: 43.0 / 255, green: 33.0 / 255, blue: 24.0 / 255, alpha: 1)
+    }
+    static var faded: Color { classic ? Color(UIColor.secondaryLabel) : ink.opacity(0.62) }
+
+    // Classic only.
+    static var accent: Color { classic ? Color(UIColor.systemBlue) : ink }
+    static let callGreen = Color(UIColor.systemGreen)
+    static let hangupRed = Color(UIColor.systemRed)
+    static let keyFill = Color(UIColor.systemGray5)
+    static let keyPressed = Color(UIColor.systemGray3)
+    static let groupFill = Color(UIColor.secondarySystemBackground)
+    static let hairline = Color(UIColor.separator)
 }
 
 enum InkWeight { case regular, bold, italic, boldItalic }
@@ -31,6 +49,9 @@ enum InkWeight { case regular, bold, italic, boldItalic }
 extension Font {
     /// Georgia, like the logo's lettering.
     static func ink(_ size: CGFloat, _ weight: InkWeight = .regular, relativeTo style: Font.TextStyle = .body) -> Font {
+        if Ink.classic {
+            return .system(size: size, weight: (weight == .bold || weight == .boldItalic) ? .semibold : .regular)
+        }
         let name: String
         switch weight {
         case .regular: name = "Georgia"
@@ -44,7 +65,8 @@ extension Font {
 
 extension UIFont {
     static func ink(_ size: CGFloat, bold: Bool = false) -> UIFont {
-        UIFont(name: bold ? "Georgia-Bold" : "Georgia", size: size)
+        if Ink.classic { return .systemFont(ofSize: size, weight: bold ? .semibold : .regular) }
+        return UIFont(name: bold ? "Georgia-Bold" : "Georgia", size: size)
             ?? .systemFont(ofSize: size, weight: bold ? .bold : .regular)
     }
 }
@@ -168,6 +190,7 @@ extension Path {
     /// along the local normal by smooth noise of at most `amplitude` points.
     /// Closed outlines use periodic noise so the pen still meets where it began.
     func wobbled(seed: UInt64, amplitude: CGFloat, step: CGFloat = 4) -> Path {
+        if Ink.classic { return self }
         var out = Path()
         var rng = InkRandom(seed: seed)
 
@@ -293,6 +316,7 @@ struct HatchFill: View {
 
     var body: some View {
         Canvas { context, size in
+            guard !Ink.classic else { return }
             var rng = InkRandom(seed: seed)
             var path = Path()
             var d = -size.height
@@ -323,6 +347,11 @@ struct InkBox: View {
 
     var body: some View {
         let inset = lineWidth / 2 + 1.5
+        if Ink.classic {
+            RoundedRectangle(cornerRadius: radius, style: .continuous)
+                .fill(fill == .clear ? Ink.groupFill : fill)
+                .accessibilityHidden(true)
+        } else {
         ZStack {
             WobblyRoundedRect(radius: radius, seed: seed, amplitude: 0.9, inset: inset).fill(fill)
             WobblyRoundedRect(radius: radius, seed: seed, amplitude: 0.9, inset: inset)
@@ -335,6 +364,7 @@ struct InkBox: View {
             }
         }
         .accessibilityHidden(true)
+        }
     }
 }
 
@@ -349,6 +379,13 @@ struct InkDisc: View {
 
     var body: some View {
         let inset = lineWidth / 2 + 1.5
+        if Ink.classic {
+            Circle()
+                .fill(pressed ? Ink.keyPressed : Ink.keyFill)
+                .frame(width: diameter, height: diameter)
+                .frame(width: diameter + 6, height: diameter + 6)
+                .accessibilityHidden(true)
+        } else {
         ZStack {
             if shadow {
                 HatchFill(spacing: 3.4, lineWidth: 1, seed: seed)
@@ -369,6 +406,7 @@ struct InkDisc: View {
         }
         .frame(width: diameter + 6, height: diameter + 6)
         .accessibilityHidden(true)
+        }
     }
 }
 
@@ -405,18 +443,52 @@ struct InkSunburst: View {
     }
 }
 
+/// The stock Phone app's white handset (SF Symbols `phone.fill`; the hang-up one
+/// needs iOS 17, earlier systems turn the same handset over).
+struct ClassicPhoneIcon: View {
+    var down: Bool
+    var size: CGFloat
+
+    var body: some View {
+        Group {
+            if down {
+                if #available(iOS 17.0, *) {
+                    Image(systemName: "phone.down.fill").font(.system(size: size, weight: .regular))
+                } else {
+                    Image(systemName: "phone.fill").font(.system(size: size, weight: .regular))
+                        .rotationEffect(.degrees(135))
+                }
+            } else {
+                Image(systemName: "phone.fill").font(.system(size: size, weight: .regular))
+            }
+        }
+        .foregroundColor(.white)
+        .accessibilityHidden(true)
+    }
+}
+
 /// Call and hang-up buttons: the sunburst with a solid disc and a paper-coloured handset.
 struct InkSunburstFace: View {
     var diameter: CGFloat
     var glyph: InkGlyph
 
     var body: some View {
-        ZStack {
-            InkSunburst(diameter: diameter)
-            WobblyCircle(seed: 21, amplitude: 0.8, inset: diameter * 0.21).fill(Ink.ink)
-            InkGlyphView(glyph: glyph, size: diameter * 0.32, color: Ink.paper)
+        if Ink.classic {
+            // Green to call, red to hang up, like the stock Phone app.
+            ZStack {
+                Circle().fill(glyph == .handsetDown ? Ink.hangupRed : Ink.callGreen)
+                    .frame(width: diameter * 0.9, height: diameter * 0.9)
+                ClassicPhoneIcon(down: glyph == .handsetDown, size: diameter * 0.4)
+            }
+            .frame(width: diameter, height: diameter)
+        } else {
+            ZStack {
+                InkSunburst(diameter: diameter)
+                WobblyCircle(seed: 21, amplitude: 0.8, inset: diameter * 0.21).fill(Ink.ink)
+                InkGlyphView(glyph: glyph, size: diameter * 0.32, color: Ink.paper)
+            }
+            .frame(width: diameter, height: diameter)
         }
-        .frame(width: diameter, height: diameter)
     }
 }
 
@@ -426,6 +498,11 @@ struct InkRule: View {
     var seed: UInt64 = 5
 
     var body: some View {
+        if Ink.classic {
+            Rectangle().fill(Ink.hairline).frame(height: 0.5)
+                .frame(maxWidth: .infinity)
+                .accessibilityHidden(true)
+        } else {
         VStack(spacing: 2.2) {
             WobblyLine(seed: seed, amplitude: 0.8)
                 .stroke(Ink.ink, style: inkStroke(double ? 1.6 : 0.9))
@@ -438,6 +515,7 @@ struct InkRule: View {
         }
         .frame(maxWidth: .infinity)
         .accessibilityHidden(true)
+        }
     }
 }
 
@@ -461,7 +539,9 @@ struct InkScreenHeader<Leading: View, Trailing: View>: View {
         // "Отмена" and "Сохранить") it is wider than the phone and stretches the whole
         // screen. ViewThatFits drops the ornaments instead of overflowing.
         Group {
-            if #available(iOS 16.0, *) {
+            if Ink.classic {
+                classicRow
+            } else if #available(iOS 16.0, *) {
                 ViewThatFits(in: .horizontal) {
                     fullRow
                     compactRow
@@ -488,6 +568,20 @@ struct InkScreenHeader<Leading: View, Trailing: View>: View {
                 .accessibilityAddTraits(.isHeader)
             Diamond().fill(Ink.ink).frame(width: 8, height: 8)
             WobblyLine(seed: 4, amplitude: 0.7).stroke(Ink.ink, style: inkStroke(1.2)).frame(height: 4)
+            ZStack(alignment: .trailing) { leading.hidden(); trailing }.fixedSize()
+        }
+    }
+
+    private var classicRow: some View {
+        HStack(spacing: 8) {
+            ZStack(alignment: .leading) { trailing.hidden(); leading }.fixedSize()
+            Text(tr(title))
+                .font(.ink(17, .bold, relativeTo: .headline))
+                .lineLimit(1)
+                .minimumScaleFactor(0.6)
+                .foregroundStyle(Ink.ink)
+                .frame(maxWidth: .infinity)
+                .accessibilityAddTraits(.isHeader)
             ZStack(alignment: .trailing) { leading.hidden(); trailing }.fixedSize()
         }
     }
@@ -525,6 +619,16 @@ extension InkScreenHeader where Leading == EmptyView, Trailing == EmptyView {
 /// The app's name, lettered like the logo and ruled off on both sides.
 struct InkHeader: View {
     var body: some View {
+        if Ink.classic {
+            Text("EzerPhone")
+                .font(.ink(20, .bold, relativeTo: .title2))
+                .lineLimit(1)
+                .foregroundStyle(Ink.ink)
+                .accessibilityAddTraits(.isHeader)
+                .frame(maxWidth: .infinity)
+                .padding(.top, 8)
+                .padding(.bottom, 6)
+        } else {
         HStack(spacing: 10) {
             WobblyLine(seed: 1, amplitude: 0.8).stroke(Ink.ink, style: inkStroke(1.6)).frame(height: 4)
             Text("EzerPhone")
@@ -539,6 +643,7 @@ struct InkHeader: View {
         .padding(.horizontal, 16)
         .padding(.top, 8)
         .padding(.bottom, 8)
+        }
     }
 }
 
@@ -552,6 +657,30 @@ struct InkStatusMark: View {
     var isDefault = false
 
     var body: some View {
+        if Ink.classic { classicBody } else { inkBody }
+    }
+
+    /// Colour carries the state here; the ring marks the default account.
+    private var classicBody: some View {
+        let fill: Color = {
+            switch kind {
+            case .registered: return Color(UIColor.systemGreen)
+            case .progress: return Color(UIColor.systemOrange)
+            case .failed: return Color(UIColor.systemRed)
+            case .inactive: return Color(UIColor.systemGray3)
+            }
+        }()
+        return ZStack {
+            if isDefault {
+                Circle().stroke(Ink.accent, lineWidth: 1.6).frame(width: size, height: size)
+            }
+            Circle().fill(fill).frame(width: size * (isDefault ? 0.56 : 0.7), height: size * (isDefault ? 0.56 : 0.7))
+        }
+        .frame(width: size, height: size)
+        .accessibilityHidden(true)
+    }
+
+    private var inkBody: some View {
         ZStack {
             WobblyCircle(seed: 11, amplitude: size * 0.03, inset: 1.5)
                 .stroke(Ink.ink, style: inkStroke(max(1.4, size * 0.09)))
@@ -610,12 +739,14 @@ struct InkEmptyState: View {
 
     var body: some View {
         VStack(spacing: 12) {
+            if !Ink.classic {
             HStack(spacing: 8) {
                 WobblyLine(seed: 14).stroke(Ink.ink, style: inkStroke(1)).frame(height: 4)
                 Diamond().fill(Ink.ink).frame(width: 7, height: 7)
                 WobblyLine(seed: 15).stroke(Ink.ink, style: inkStroke(1)).frame(height: 4)
             }
             .frame(width: 130)
+            }
             Text(tr(text))
                 .font(.ink(15, .italic, relativeTo: .callout))
                 .multilineTextAlignment(.center)
@@ -666,11 +797,13 @@ struct InkTextButton: View {
             VStack(spacing: 0) {
                 Text(tr(title))
                     .font(.ink(15, bold ? .boldItalic : .italic, relativeTo: .callout))
-                    .foregroundStyle(Ink.ink)
+                    .foregroundStyle(Ink.accent)
                     .fixedSize()
-                WobblyLine(seed: InkSeed.of(title), amplitude: 0.5)
-                    .stroke(Ink.ink, style: inkStroke(1))
-                    .frame(height: 3)
+                if !Ink.classic {
+                    WobblyLine(seed: InkSeed.of(title), amplitude: 0.5)
+                        .stroke(Ink.ink, style: inkStroke(1))
+                        .frame(height: 3)
+                }
             }
             .padding(.horizontal, 4)
             .frame(minHeight: 44)
@@ -692,7 +825,7 @@ struct InkWideButton: View {
                 if let glyph { InkGlyphView(glyph: glyph, size: 18) }
                 Text(tr(title)).font(.ink(16, .bold, relativeTo: .callout))
             }
-            .foregroundStyle(Ink.ink)
+            .foregroundStyle(Ink.accent)
             .frame(maxWidth: .infinity, minHeight: 48)
             .background(InkBox(radius: 24, seed: InkSeed.of(title), lineWidth: 2))
             .contentShape(Rectangle())
@@ -706,6 +839,14 @@ struct InkCallMini: View {
     var size: CGFloat = 34
 
     var body: some View {
+        if Ink.classic {
+            ZStack {
+                Circle().fill(Ink.callGreen)
+                ClassicPhoneIcon(down: false, size: size * 0.5)
+            }
+            .frame(width: size, height: size)
+            .accessibilityHidden(true)
+        } else {
         ZStack {
             WobblyCircle(seed: 41, amplitude: 0.6, inset: 1.5).stroke(Ink.ink, style: inkStroke(1.8))
             WobblyCircle(seed: 42, amplitude: 0.5, inset: 1.5 + size * 0.11).stroke(Ink.ink, style: inkStroke(0.8))
@@ -713,6 +854,7 @@ struct InkCallMini: View {
         }
         .frame(width: size, height: size)
         .accessibilityHidden(true)
+        }
     }
 }
 
@@ -724,6 +866,22 @@ struct InkSwitch: View {
     var isOn: Bool
 
     var body: some View {
+        if Ink.classic { classicBody } else { inkBody }
+    }
+
+    private var classicBody: some View {
+        ZStack(alignment: isOn ? .trailing : .leading) {
+            Capsule().fill(isOn ? Ink.callGreen : Color(UIColor.systemGray4))
+            Circle().fill(Color.white)
+                .frame(width: 27, height: 27)
+                .shadow(color: .black.opacity(0.25), radius: 2, y: 1)
+                .padding(.horizontal, 2)
+        }
+        .frame(width: 52, height: 31)
+        .animation(.easeOut(duration: 0.14), value: isOn)
+    }
+
+    private var inkBody: some View {
         ZStack(alignment: isOn ? .trailing : .leading) {
             ZStack {
                 if isOn {
@@ -803,8 +961,8 @@ struct InkSection<Content: View>: View {
             if let title {
                 Text(tr(title).uppercased())
                     .font(.ink(12, .bold, relativeTo: .caption))
-                    .kerning(2)
-                    .foregroundStyle(Ink.ink)
+                    .kerning(Ink.classic ? 0 : 2)
+                    .foregroundStyle(Ink.classic ? Ink.faded : Ink.ink)
                     .padding(.leading, 8)
                     .accessibilityAddTraits(.isHeader)
             }
@@ -850,6 +1008,23 @@ struct InkField: View {
             .frame(minHeight: 30)
         }
         .padding(.vertical, 8)
+    }
+}
+
+/// Selection mark for a list of choices: the registered/empty ring when drawn,
+/// a blue check when classic.
+struct InkRadioMark: View {
+    var selected: Bool
+    var size: CGFloat = 24
+
+    var body: some View {
+        if Ink.classic {
+            InkGlyphView(glyph: .check, size: size * 0.8, color: Ink.accent)
+                .opacity(selected ? 1 : 0)
+                .frame(width: size, height: size)
+        } else {
+            InkStatusMark(kind: selected ? .registered : .inactive, size: size)
+        }
     }
 }
 

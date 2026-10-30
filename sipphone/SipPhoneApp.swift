@@ -6,6 +6,7 @@ struct SipPhoneApp: App {
     @StateObject private var settings = SipSettings.shared
     @StateObject private var linphone = LinphoneManager.shared
     @StateObject private var coordinator = AppCoordinator.shared
+    @StateObject private var theme = AppTheme.shared
 
     init() {
         // On iOS 15 a List can't hide its own background, so clear it for every table.
@@ -18,10 +19,10 @@ struct SipPhoneApp: App {
     var body: some Scene {
         WindowGroup {
             RootView()
-                // Parchment and ink only: a dark appearance would turn every system
-                // surface (keyboard, menus, sheets) against the drawn interface.
-                .preferredColorScheme(.light)
-                .tint(Ink.ink)
+                // The drawn look is parchment and ink only (a dark appearance would turn every
+                // system surface against it); the classic looks choose their own scheme.
+                .preferredColorScheme(theme.choice.colorScheme)
+                .tint(Ink.accent)
                 .environmentObject(settings)
                 .environmentObject(linphone)
                 .environmentObject(coordinator)

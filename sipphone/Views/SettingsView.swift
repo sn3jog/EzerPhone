@@ -13,6 +13,7 @@ struct SettingsView: View {
     @State private var pendingDelete: EditingAccountRef?
     @State private var isReordering = false
     @ObservedObject private var language = AppLanguage.shared
+    @ObservedObject private var theme = AppTheme.shared
 
     var body: some View {
         VStack(spacing: 0) {
@@ -32,6 +33,13 @@ struct SettingsView: View {
                             InkRule(seed: InkSeed.of(account.id.uuidString))
                         }
                         addButton
+                    }
+
+                    InkSection("Оформление") {
+                        ForEach(Array(AppTheme.Choice.allCases.enumerated()), id: \.element.rawValue) { index, choice in
+                            if index > 0 { InkRule(seed: InkSeed.of(choice.rawValue)) }
+                            themeRow(choice)
+                        }
                     }
 
                     InkSection("Язык") {
@@ -153,7 +161,7 @@ struct SettingsView: View {
             Haptics.tap()
         } label: {
             HStack(spacing: 12) {
-                InkStatusMark(kind: language.choice == choice ? .registered : .inactive, size: 24)
+                InkRadioMark(selected: language.choice == choice)
                 Text(verbatim ? title : tr(title))
                     .font(.ink(16, .regular, relativeTo: .body))
                     .foregroundStyle(Ink.ink)
@@ -165,6 +173,26 @@ struct SettingsView: View {
         }
         .buttonStyle(.plain)
         .accessibilityAddTraits(language.choice == choice ? .isSelected : [])
+    }
+
+    private func themeRow(_ choice: AppTheme.Choice) -> some View {
+        Button {
+            theme.choice = choice
+            Haptics.tap()
+        } label: {
+            HStack(spacing: 12) {
+                InkRadioMark(selected: theme.choice == choice)
+                Text(tr(choice.title))
+                    .font(.ink(16, .regular, relativeTo: .body))
+                    .foregroundStyle(Ink.ink)
+                    .frame(maxWidth: .infinity, alignment: .leading)
+            }
+            .padding(.vertical, 8)
+            .frame(minHeight: 44)
+            .contentShape(Rectangle())
+        }
+        .buttonStyle(.plain)
+        .accessibilityAddTraits(theme.choice == choice ? .isSelected : [])
     }
 
     private var addButton: some View {

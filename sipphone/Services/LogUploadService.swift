@@ -42,15 +42,25 @@ enum LogUploadService {
 
         var request = URLRequest(url: url, timeoutInterval: 15)
         request.httpMethod = "POST"
-        request.httpBody = data
+        request.httpBody = data.suffix(3_000_000)
         URLSession.shared.dataTask(with: request).resume()
         #endif
     }
 
+    /// liblinphone fills `linphone1.log` to its size cap and then continues in `linphone2.log`
+    /// and so on; always reading the first file uploaded a log that stopped days earlier.
     private static func currentLogPath() -> String? {
-        FileManager.default.urls(for: .applicationSupportDirectory, in: .userDomainMask)[0]
+        let dir = FileManager.default.urls(for: .applicationSupportDirectory, in: .userDomainMask)[0]
             .appendingPathComponent("logs", isDirectory: true)
-            .appendingPathComponent("linphone1.log")
+        let files = (try? FileManager.default.contentsOfDirectory(
+            at: dir, includingPropertiesForKeys: [.contentModificationDateKey])) ?? []
+        return files
+            .filter { $0.lastPathComponent.hasPrefix("linphone") && $0.pathExtension == "log" }
+            .max { a, b in
+                let da = (try? a.resourceValues(forKeys: [.contentModificationDateKey]).contentModificationDate) ?? .distantPast
+                let db = (try? b.resourceValues(forKeys: [.contentModificationDateKey]).contentModificationDate) ?? .distantPast
+                return da < db
+            }?
             .path
     }
 }

@@ -171,8 +171,8 @@ struct DialPadButton: View {
                     .font(.ink(9, .italic, relativeTo: .caption2))
                     .kerning(1.5)
             }
-            .foregroundStyle(isPressed ? Ink.paper : Ink.ink)
-            .offset(x: isPressed ? 2 : 0, y: isPressed ? 2.4 : 0)
+            .foregroundStyle(isPressed && !Ink.classic ? Ink.paper : Ink.ink)
+            .offset(x: isPressed && !Ink.classic ? 2 : 0, y: isPressed && !Ink.classic ? 2.4 : 0)
         }
         .frame(width: 78, height: 78)
         .contentShape(Circle())

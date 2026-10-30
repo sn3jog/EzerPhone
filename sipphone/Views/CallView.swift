@@ -44,11 +44,11 @@ struct CallView: View {
                     .lineLimit(1)
                     .padding(.horizontal, 24)
                 HStack(spacing: 8) {
-                    Diamond().fill(Ink.ink).frame(width: 7, height: 7)
+                    if !Ink.classic { Diamond().fill(Ink.ink).frame(width: 7, height: 7) }
                     Text(tr(linphone.activeCallIsIncoming ? "Входящий вызов" : "Исходящий вызов"))
                         .font(.ink(16, .italic, relativeTo: .callout))
                         .foregroundStyle(Ink.faded)
-                    Diamond().fill(Ink.ink).frame(width: 7, height: 7)
+                    if !Ink.classic { Diamond().fill(Ink.ink).frame(width: 7, height: 7) }
                 }
         }
     }
@@ -112,6 +112,14 @@ private struct InkAvatar: View {
 
     var body: some View {
         let inner = size * 0.66
+        if Ink.classic {
+            ZStack {
+                Circle().fill(Ink.keyFill)
+                InkGlyphView(glyph: .person, size: size * 0.5, color: Ink.faded)
+            }
+            .frame(width: size, height: size)
+            .accessibilityHidden(true)
+        } else {
         ZStack {
             InkDisc(diameter: size, seed: 9, lineWidth: 3)
             ZStack {
@@ -134,6 +142,7 @@ private struct InkAvatar: View {
             .clipShape(Circle())
         }
         .accessibilityHidden(true)
+        }
     }
 }
 
@@ -147,8 +156,8 @@ private struct CallButton: View {
         Button(action: action) {
             ZStack {
                 InkDisc(diameter: 64, seed: InkSeed.of(label), pressed: active)
-                InkGlyphView(glyph: glyph, size: 28, color: active ? Ink.paper : Ink.ink)
-                    .offset(x: active ? 2 : 0, y: active ? 2.4 : 0)
+                InkGlyphView(glyph: glyph, size: 28, color: active && !Ink.classic ? Ink.paper : Ink.ink)
+                    .offset(x: active && !Ink.classic ? 2 : 0, y: active && !Ink.classic ? 2.4 : 0)
             }
             .frame(width: 72, height: 72)
             .contentShape(Circle())
