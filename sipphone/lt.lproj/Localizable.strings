@@ -33,7 +33,7 @@
 "Удалить аккаунт?" = "Ištrinti paskyrą?";
 "Удалить" = "Ištrinti";
 "Вместе с ним будут удалены сохранённые пароли." = "Kartu bus ištrinti ir išsaugoti slaptažodžiai.";
-"Верхний аккаунт — по умолчанию для звонков; нажмите на значок слева, чтобы сделать аккаунт основным, стрелки рядом переставляют аккаунты, а «Изменить» открывает удаление. Закрашенный значок — зарегистрирован, штриховка — идёт регистрация, крест — ошибка, пустой — неактивен; двойное кольцо — аккаунт по умолчанию. Переключатель справа включает и выключает аккаунт. Доступ (стук) и VPN настраиваются внутри аккаунта." = "Viršutinė paskyra yra numatytoji skambučiams. Palieskite piktogramą kairėje, kad paskyrą padarytumėte numatytąja; šalia esančios rodyklės keičia paskyrų eilę, o „Redaguoti“ leidžia ištrinti. Užpildyta piktograma reiškia užregistruota, brūkšniavimas – registruojama, kryžius – klaida, tuščia – neaktyvi; dvigubas žiedas žymi numatytąją paskyrą. Dešinėje esantis jungiklis įjungia arba išjungia paskyrą. Prieiga (beldimas) ir VPN nustatomi kiekvienos paskyros viduje.";
+"Верхний аккаунт — по умолчанию для звонков; нажмите на значок слева, чтобы сделать аккаунт основным, стрелки рядом переставляют аккаунты, а «Изменить» открывает удаление. Закрашенный значок — зарегистрирован, штриховка — идёт регистрация, крест — ошибка, пустой — неактивен; двойное кольцо — аккаунт по умолчанию. Переключатель справа включает и выключает аккаунт. Доступ (стук) настраивается внутри аккаунта." = "Viršutinė paskyra yra numatytoji skambučiams. Palieskite piktogramą kairėje, kad paskyrą padarytumėte numatytąja; šalia esančios rodyklės keičia paskyrų eilę, o „Redaguoti“ leidžia ištrinti. Užpildyta piktograma reiškia užregistruota, brūkšniavimas – registruojama, kryžius – klaida, tuščia – neaktyvi; dvigubas žiedas žymi numatytąją paskyrą. Dešinėje esantis jungiklis įjungia arba išjungia paskyrą. Prieiga (beldimas) nustatoma kiekvienos paskyros viduje.";
 "Сделать основным: %@" = "Padaryti numatytąja: %@";
 "Выше: %@" = "Perkelti aukščiau: %@";
 "Ниже: %@" = "Perkelti žemiau: %@";
@@ -53,8 +53,6 @@
 "Стучать перед регистрацией" = "Beldėti prieš registraciją";
 "Токен (если нужен)" = "Žetonas (jei reikia)";
 "Перестук каждые N минут" = "Kartoti beldimą kas N min.";
-"Недоступно: Personal VPN capability не поддерживается бесплатным Apple ID (Personal Team) — нужен платный Developer Program, так же как для фоновых звонков (PushKit)." = "Nepasiekiama: Personal VPN galimybė nepalaikoma su nemokamu Apple ID (Personal Team) — reikia mokamos Developer Program narystės, kaip ir skambučiams fone (PushKit).";
-"Подключать VPN перед регистрацией" = "Prijungti VPN prieš registraciją";
 "История" = "Istorija";
 "Клавиатура" = "Klaviatūra";
 "Зарегистрирован" = "Užregistruota";

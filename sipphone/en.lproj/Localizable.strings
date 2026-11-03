@@ -33,7 +33,7 @@
 "Удалить аккаунт?" = "Delete this account?";
 "Удалить" = "Delete";
 "Вместе с ним будут удалены сохранённые пароли." = "Its saved passwords will be deleted too.";
-"Верхний аккаунт — по умолчанию для звонков; нажмите на значок слева, чтобы сделать аккаунт основным, стрелки рядом переставляют аккаунты, а «Изменить» открывает удаление. Закрашенный значок — зарегистрирован, штриховка — идёт регистрация, крест — ошибка, пустой — неактивен; двойное кольцо — аккаунт по умолчанию. Переключатель справа включает и выключает аккаунт. Доступ (стук) и VPN настраиваются внутри аккаунта." = "The top account is the default for calls. Tap the icon on the left to make an account the default; the arrows next to it reorder accounts, and “Edit” reveals deletion. A solid icon means registered, hatching means registering, a cross means an error, an empty one means inactive; a double ring marks the default account. The switch on the right turns an account on or off. Access (knock) and VPN are set inside each account.";
+"Верхний аккаунт — по умолчанию для звонков; нажмите на значок слева, чтобы сделать аккаунт основным, стрелки рядом переставляют аккаунты, а «Изменить» открывает удаление. Закрашенный значок — зарегистрирован, штриховка — идёт регистрация, крест — ошибка, пустой — неактивен; двойное кольцо — аккаунт по умолчанию. Переключатель справа включает и выключает аккаунт. Доступ (стук) настраивается внутри аккаунта." = "The top account is the default for calls. Tap the icon on the left to make an account the default; the arrows next to it reorder accounts, and “Edit” reveals deletion. A solid icon means registered, hatching means registering, a cross means an error, an empty one means inactive; a double ring marks the default account. The switch on the right turns an account on or off. Access (knock) is set inside each account.";
 "Сделать основным: %@" = "Make default: %@";
 "Выше: %@" = "Move up: %@";
 "Ниже: %@" = "Move down: %@";
@@ -53,8 +53,6 @@
 "Стучать перед регистрацией" = "Knock before registering";
 "Токен (если нужен)" = "Token (if needed)";
 "Перестук каждые N минут" = "Re-knock every N minutes";
-"Недоступно: Personal VPN capability не поддерживается бесплатным Apple ID (Personal Team) — нужен платный Developer Program, так же как для фоновых звонков (PushKit)." = "Unavailable: the Personal VPN capability isn't supported with a free Apple ID (Personal Team) — a paid Developer Program membership is needed, just as for background calls (PushKit).";
-"Подключать VPN перед регистрацией" = "Connect VPN before registering";
 "История" = "History";
 "Клавиатура" = "Keypad";
 "Зарегистрирован" = "Registered";

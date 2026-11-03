@@ -58,8 +58,11 @@ struct KeypadView: View {
             HStack {
                 // Balances the delete button so the number stays centred.
                 Color.clear.frame(width: 44, height: 44)
-                NoKeyboardTextField(text: $dialString, placeholder: "Номер или логин")
+                NoKeyboardTextField(text: $dialString, placeholder: tr("Номер или логин"))
                     .frame(height: 40)
+                    #if DEBUG
+                    .onAppear { if ScreenshotMode.screen == "keypad" { dialString = "+97235550199" } }
+                    #endif
                 if dialString.isEmpty {
                     Color.clear.frame(width: 44, height: 44)
                 } else {

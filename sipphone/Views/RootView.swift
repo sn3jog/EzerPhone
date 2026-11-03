@@ -37,6 +37,17 @@ struct RootView: View {
         .environment(\.locale, language.locale)
         .environment(\.layoutDirection, language.layoutDirection)
         .inkPaper()
+        #if DEBUG
+        .onAppear {
+            switch ScreenshotMode.screen {
+            case "favorites": selectedTab = .favorites
+            case "recents": selectedTab = .recents
+            case "contacts": selectedTab = .contacts
+            case "settings": selectedTab = .settings
+            default: break
+            }
+        }
+        #endif
         .fullScreenCover(isPresented: Binding(
             get: { linphone.activeCallRemote != nil },
             set: { _ in }

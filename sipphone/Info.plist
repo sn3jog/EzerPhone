@@ -60,7 +60,7 @@
 	</dict>
 	<key>UIRequiredDeviceCapabilities</key>
 	<array>
-		<string>armv7</string>
+		<string>arm64</string>
 	</array>
 	<key>UIBackgroundModes</key>
 	<array>
@@ -72,6 +72,6 @@
 	<key>NSLocalNetworkUsageDescription</key>
 	<string>The app talks to the SIP telephony server on your network.</string>
 	<key>NSContactsUsageDescription</key>
-	<string>Contacts access is needed to sync them for calling.</string>
+	<string>Contacts are shown in the app so you can call them. They stay on your iPhone and are never uploaded.</string>
 </dict>
 </plist>

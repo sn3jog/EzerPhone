@@ -33,7 +33,7 @@
 "Удалить аккаунт?" = "Dzēst kontu?";
 "Удалить" = "Dzēst";
 "Вместе с ним будут удалены сохранённые пароли." = "Kopā ar to tiks dzēstas saglabātās paroles.";
-"Верхний аккаунт — по умолчанию для звонков; нажмите на значок слева, чтобы сделать аккаунт основным, стрелки рядом переставляют аккаунты, а «Изменить» открывает удаление. Закрашенный значок — зарегистрирован, штриховка — идёт регистрация, крест — ошибка, пустой — неактивен; двойное кольцо — аккаунт по умолчанию. Переключатель справа включает и выключает аккаунт. Доступ (стук) и VPN настраиваются внутри аккаунта." = "Augšējais konts ir noklusējuma konts zvaniem. Pieskarieties ikonai kreisajā pusē, lai kontu padarītu par noklusējuma kontu; bultiņas blakus tai maina kontu secību, bet «Rediģēt» ļauj dzēst. Aizpildīta ikona nozīmē reģistrēts, svītrojums — notiek reģistrācija, krusts — kļūda, tukša — neaktīvs; dubults gredzens atzīmē noklusējuma kontu. Slēdzis labajā pusē ieslēdz vai izslēdz kontu. Piekļuve (klauvēšana) un VPN tiek iestatīti katra konta iekšienē.";
+"Верхний аккаунт — по умолчанию для звонков; нажмите на значок слева, чтобы сделать аккаунт основным, стрелки рядом переставляют аккаунты, а «Изменить» открывает удаление. Закрашенный значок — зарегистрирован, штриховка — идёт регистрация, крест — ошибка, пустой — неактивен; двойное кольцо — аккаунт по умолчанию. Переключатель справа включает и выключает аккаунт. Доступ (стук) настраивается внутри аккаунта." = "Augšējais konts ir noklusējuma konts zvaniem. Pieskarieties ikonai kreisajā pusē, lai kontu padarītu par noklusējuma kontu; bultiņas blakus tai maina kontu secību, bet «Rediģēt» ļauj dzēst. Aizpildīta ikona nozīmē reģistrēts, svītrojums — notiek reģistrācija, krusts — kļūda, tukša — neaktīvs; dubults gredzens atzīmē noklusējuma kontu. Slēdzis labajā pusē ieslēdz vai izslēdz kontu. Piekļuve (klauvēšana) tiek iestatīta katra konta iekšienē.";
 "Сделать основным: %@" = "Padarīt par noklusējuma: %@";
 "Выше: %@" = "Pārvietot augstāk: %@";
 "Ниже: %@" = "Pārvietot zemāk: %@";
@@ -53,8 +53,6 @@
 "Стучать перед регистрацией" = "Klauvēt pirms reģistrācijas";
 "Токен (если нужен)" = "Token (ja nepieciešams)";
 "Перестук каждые N минут" = "Atkārtot klauvēšanu ik N minūtes";
-"Недоступно: Personal VPN capability не поддерживается бесплатным Apple ID (Personal Team) — нужен платный Developer Program, так же как для фоновых звонков (PushKit)." = "Nav pieejams: Personal VPN iespēja netiek atbalstīta ar bezmaksas Apple ID (Personal Team) — nepieciešama maksas Developer Program dalība, tāpat kā zvaniem fonā (PushKit).";
-"Подключать VPN перед регистрацией" = "Pievienot VPN pirms reģistrācijas";
 "История" = "Vēsture";
 "Клавиатура" = "Tastatūra";
 "Зарегистрирован" = "Reģistrēts";

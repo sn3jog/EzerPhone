@@ -12,9 +12,9 @@ Requires iOS 15 or later.
 
 ## Before you build
 
-1. **Signing.** Open `sipphone.xcodeproj`, select the `sipphone` target, and under Signing &
-   Capabilities pick your own team. Change the bundle identifier from `info.ezer.sipphone`
-   to one of your own.
+1. **Signing.** The project is set up for the App Store build (`info.ezer.sipphone`). To build
+   your own copy, open `sipphone.xcodeproj`, select the `sipphone` target, pick your own team
+   under Signing & Capabilities and change the bundle identifier to one of your own.
 2. **Server.** `sipphone/Services/SecretsConfig.swift` holds a placeholder `serverBase`. It is
    the URL of the helper service that sits next to your PBX and offers `provision.php`
    (one-tap setup), `knock.php` (IP allow-listing before registration) and `logupload.php`
@@ -23,6 +23,10 @@ Requires iOS 15 or later.
 3. **Dependencies** come through Swift Package Manager (`linphone-sdk-swift-ios`) and resolve
    when the project is opened.
 
+## Privacy
+
+The app collects nothing for its developer: see [PRIVACY.md](PRIVACY.md).
+
 ## Notes
 
 - Push notifications for incoming calls need a paid Apple developer account (PushKit). Without
@@ -30,3 +34,8 @@ Requires iOS 15 or later.
 - The interface is built from its own small design system, `Views/InkStyle.swift` and
   `Views/InkGlyphs.swift`.
 - `ezerphone://setup?t=<token>` is the URL scheme used for one-tap setup.
+
+## License
+
+EzerPhone is free software under the [GNU General Public License v3.0](LICENSE). It is built on
+[liblinphone](https://www.linphone.org) by Belledonne Communications, which is also GPLv3.

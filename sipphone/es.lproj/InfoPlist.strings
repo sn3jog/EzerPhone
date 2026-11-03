@@ -1,3 +1,3 @@
 "NSMicrophoneUsageDescription" = "Se necesita acceso al micrófono para las llamadas de voz por SIP.";
 "NSLocalNetworkUsageDescription" = "La app se comunica con el servidor de telefonía SIP de tu red.";
-"NSContactsUsageDescription" = "Se necesita acceso a los contactos para sincronizarlos y poder llamar.";
+"NSContactsUsageDescription" = "Los contactos se muestran en la app para que pueda llamarlos. Permanecen en su iPhone y nunca se envían a ningún sitio.";

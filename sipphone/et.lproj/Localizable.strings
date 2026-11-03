@@ -33,7 +33,7 @@
 "Удалить аккаунт?" = "Kustutada konto?";
 "Удалить" = "Kustuta";
 "Вместе с ним будут удалены сохранённые пароли." = "Koos sellega kustutatakse salvestatud paroolid.";
-"Верхний аккаунт — по умолчанию для звонков; нажмите на значок слева, чтобы сделать аккаунт основным, стрелки рядом переставляют аккаунты, а «Изменить» открывает удаление. Закрашенный значок — зарегистрирован, штриховка — идёт регистрация, крест — ошибка, пустой — неактивен; двойное кольцо — аккаунт по умолчанию. Переключатель справа включает и выключает аккаунт. Доступ (стук) и VPN настраиваются внутри аккаунта." = "Ülemine konto on kõnede vaikekonto. Puudutage vasakpoolset ikooni, et konto vaikimisi kontoks määrata; kõrvalolevad nooled muudavad kontode järjekorda ja „Muuda“ lubab kustutada. Täidetud ikoon tähendab registreeritud, viirutus — registreerimine käib, rist — viga, tühi — mitteaktiivne; topeltrõngas tähistab vaikekontot. Parempoolne lüliti lülitab konto sisse või välja. Ligipääs (koputus) ja VPN seadistatakse iga konto sees.";
+"Верхний аккаунт — по умолчанию для звонков; нажмите на значок слева, чтобы сделать аккаунт основным, стрелки рядом переставляют аккаунты, а «Изменить» открывает удаление. Закрашенный значок — зарегистрирован, штриховка — идёт регистрация, крест — ошибка, пустой — неактивен; двойное кольцо — аккаунт по умолчанию. Переключатель справа включает и выключает аккаунт. Доступ (стук) настраивается внутри аккаунта." = "Ülemine konto on kõnede vaikekonto. Puudutage vasakpoolset ikooni, et konto vaikimisi kontoks määrata; kõrvalolevad nooled muudavad kontode järjekorda ja „Muuda“ lubab kustutada. Täidetud ikoon tähendab registreeritud, viirutus — registreerimine käib, rist — viga, tühi — mitteaktiivne; topeltrõngas tähistab vaikekontot. Parempoolne lüliti lülitab konto sisse või välja. Ligipääs (koputus) seadistatakse iga konto sees.";
 "Сделать основным: %@" = "Määra vaikimisi: %@";
 "Выше: %@" = "Liiguta üles: %@";
 "Ниже: %@" = "Liiguta alla: %@";
@@ -53,8 +53,6 @@
 "Стучать перед регистрацией" = "Koputa enne registreerimist";
 "Токен (если нужен)" = "Tunnusluba (vajadusel)";
 "Перестук каждые N минут" = "Korda koputust iga N minuti järel";
-"Недоступно: Personal VPN capability не поддерживается бесплатным Apple ID (Personal Team) — нужен платный Developer Program, так же как для фоновых звонков (PushKit)." = "Pole saadaval: Personal VPN võimalust tasuta Apple ID (Personal Team) ei toeta — vaja on tasulist Developer Programi liikmelisust, nagu taustakõnedegi (PushKit) puhul.";
-"Подключать VPN перед регистрацией" = "Ühenda VPN enne registreerimist";
 "История" = "Ajalugu";
 "Клавиатура" = "Klahvistik";
 "Зарегистрирован" = "Registreeritud";

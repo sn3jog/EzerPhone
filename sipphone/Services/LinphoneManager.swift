@@ -109,6 +109,16 @@ final class LinphoneManager: NSObject, ObservableObject {
 
     // MARK: - Registration (multi-account)
 
+    #if DEBUG
+    /// Screenshot mode only (`ScreenshotMode`): shows accounts as registered, and optionally
+    /// a call in progress, without any SIP traffic.
+    func showAsRegistered(_ ids: [UUID], callingTo remote: String?) {
+        for id in ids { registrationStates[id] = .ok }
+        activeCallRemote = remote
+        activeCallIsIncoming = false
+    }
+    #endif
+
     func register(accounts: [SipAccount], settingsStore: SipSettings) {
         // Rebuilding destroys every Account object, and any call riding on one
         // dies with it. The re-knock timer, foreground and path changes all land

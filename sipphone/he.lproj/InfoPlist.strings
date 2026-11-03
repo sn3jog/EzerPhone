@@ -1,3 +1,3 @@
 "NSMicrophoneUsageDescription" = "נדרשת גישה למיקרופון לשיחות קוליות דרך SIP.";
 "NSLocalNetworkUsageDescription" = "האפליקציה מתקשרת עם שרת טלפוניית ה-SIP ברשת שלכם.";
-"NSContactsUsageDescription" = "נדרשת גישה לאנשי הקשר כדי לסנכרן אותם לצורך חיוג.";
+"NSContactsUsageDescription" = "אנשי הקשר מוצגים באפליקציה כדי שתוכלו להתקשר אליהם. הם נשארים ב-iPhone ואינם נשלחים לשום מקום.";

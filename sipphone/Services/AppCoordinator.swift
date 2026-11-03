@@ -39,6 +39,12 @@ final class AppCoordinator: ObservableObject {
     }
 
     func start() {
+        #if DEBUG
+        if ScreenshotMode.isOn {
+            ScreenshotMode.seed()
+            return
+        }
+        #endif
         runRegisterFlow(reason: "app start")
         scheduleReKnock()
     }
@@ -64,6 +70,9 @@ final class AppCoordinator: ObservableObject {
     // MARK: - Internal
 
     private func runRegisterFlow(reason: String) {
+        #if DEBUG
+        if ScreenshotMode.isOn { return }
+        #endif
         let settings = SipSettings.shared
         let activeAccounts = settings.accounts.filter { $0.enabled && $0.isValid }
         let accountsNeedingKnock = activeAccounts.filter { $0.knockEnabled && !$0.knockURL.isEmpty }

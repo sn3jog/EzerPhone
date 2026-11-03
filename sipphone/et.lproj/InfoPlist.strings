@@ -1,3 +1,3 @@
 "NSMicrophoneUsageDescription" = "SIP-häälkõnede jaoks on vaja mikrofoni juurdepääsu.";
 "NSLocalNetworkUsageDescription" = "Rakendus suhtleb teie võrgus oleva SIP-telefoniserveriga.";
-"NSContactsUsageDescription" = "Kontaktidele juurdepääs on vajalik, et neid helistamiseks sünkroonida.";
+"NSContactsUsageDescription" = "Kontakte näidatakse rakenduses, et saaksite neile helistada. Need jäävad teie iPhone'i ega lähe kuhugi.";
