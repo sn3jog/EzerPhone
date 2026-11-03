@@ -1,3 +1,4 @@
 "NSMicrophoneUsageDescription" = "يلزم الوصول إلى الميكروفون للمكالمات الصوتية عبر SIP.";
 "NSLocalNetworkUsageDescription" = "يتصل التطبيق بخادم اتصالات SIP على شبكتك.";
 "NSContactsUsageDescription" = "تُعرض جهات الاتصال في التطبيق لتتمكن من الاتصال بها. تبقى على iPhone الخاص بك ولا تُرسل إلى أي مكان.";
+"NSCameraUsageDescription" = "يُجري EzerPhone مكالمات صوتية فقط ولا يشغّل الكاميرا أبدًا. يطلب iOS هذا النص لأن مكتبة الاتصال التي بُني عليها التطبيق تدعم الفيديو أيضًا.";

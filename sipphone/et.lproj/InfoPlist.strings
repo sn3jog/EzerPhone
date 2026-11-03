@@ -1,3 +1,4 @@
 "NSMicrophoneUsageDescription" = "SIP-häälkõnede jaoks on vaja mikrofoni juurdepääsu.";
 "NSLocalNetworkUsageDescription" = "Rakendus suhtleb teie võrgus oleva SIP-telefoniserveriga.";
 "NSContactsUsageDescription" = "Kontakte näidatakse rakenduses, et saaksite neile helistada. Need jäävad teie iPhone'i ega lähe kuhugi.";
+"NSCameraUsageDescription" = "EzerPhone teeb ainult häälkõnesid ega lülita kunagi kaamerat sisse. iOS nõuab seda teksti, sest rakenduse aluseks olev kõneteek toetab ka videot.";

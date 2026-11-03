@@ -1,3 +1,4 @@
 "NSMicrophoneUsageDescription" = "Der Zugriff auf das Mikrofon wird für Sprachanrufe über SIP benötigt.";
 "NSLocalNetworkUsageDescription" = "Die App kommuniziert mit dem SIP-Telefonieserver in Ihrem Netzwerk.";
 "NSContactsUsageDescription" = "Kontakte werden in der App angezeigt, damit Sie sie anrufen können. Sie bleiben auf Ihrem iPhone und werden nirgendwohin hochgeladen.";
+"NSCameraUsageDescription" = "EzerPhone führt nur Sprachanrufe und schaltet die Kamera nie ein. iOS verlangt diesen Text, weil die zugrunde liegende Anrufbibliothek auch Video unterstützt.";

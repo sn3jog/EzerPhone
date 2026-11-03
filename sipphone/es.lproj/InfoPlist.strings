@@ -1,3 +1,4 @@
 "NSMicrophoneUsageDescription" = "Se necesita acceso al micrófono para las llamadas de voz por SIP.";
 "NSLocalNetworkUsageDescription" = "La app se comunica con el servidor de telefonía SIP de tu red.";
 "NSContactsUsageDescription" = "Los contactos se muestran en la app para que pueda llamarlos. Permanecen en su iPhone y nunca se envían a ningún sitio.";
+"NSCameraUsageDescription" = "EzerPhone solo hace llamadas de voz y nunca enciende la cámara. iOS pide este texto porque la biblioteca de llamadas en la que se basa también admite vídeo.";

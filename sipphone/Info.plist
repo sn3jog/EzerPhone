@@ -67,6 +67,8 @@
 		<string>voip</string>
 		<string>audio</string>
 	</array>
+	<key>NSCameraUsageDescription</key>
+	<string>EzerPhone makes voice calls only and never turns on the camera. iOS asks for this text because the calling library it is built on also supports video.</string>
 	<key>NSMicrophoneUsageDescription</key>
 	<string>Microphone access is needed for voice calls over SIP.</string>
 	<key>NSLocalNetworkUsageDescription</key>

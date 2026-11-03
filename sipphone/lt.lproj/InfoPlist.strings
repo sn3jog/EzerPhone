@@ -1,3 +1,4 @@
 "NSMicrophoneUsageDescription" = "Balso skambučiams per SIP reikia prieigos prie mikrofono.";
 "NSLocalNetworkUsageDescription" = "Programa jungiasi prie SIP telefonijos serverio jūsų tinkle.";
 "NSContactsUsageDescription" = "Kontaktai rodomi programėlėje, kad galėtumėte jiems paskambinti. Jie lieka jūsų iPhone ir niekur nesiunčiami.";
+"NSCameraUsageDescription" = "EzerPhone skambina tik balsu ir niekada neįjungia kameros. iOS reikalauja šio teksto, nes skambučių biblioteka, kuria remiasi programėlė, palaiko ir vaizdą.";

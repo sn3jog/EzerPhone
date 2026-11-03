@@ -1,3 +1,4 @@
 "NSMicrophoneUsageDescription" = "נדרשת גישה למיקרופון לשיחות קוליות דרך SIP.";
 "NSLocalNetworkUsageDescription" = "האפליקציה מתקשרת עם שרת טלפוניית ה-SIP ברשת שלכם.";
 "NSContactsUsageDescription" = "אנשי הקשר מוצגים באפליקציה כדי שתוכלו להתקשר אליהם. הם נשארים ב-iPhone ואינם נשלחים לשום מקום.";
+"NSCameraUsageDescription" = "EzerPhone מבצעת שיחות קוליות בלבד ולעולם אינה מפעילה את המצלמה. iOS דורשת את הטקסט הזה כי ספריית השיחות שעליה היא בנויה תומכת גם בווידאו.";

@@ -1,3 +1,4 @@
 "NSMicrophoneUsageDescription" = "通过 SIP 进行语音通话需要访问麦克风。";
 "NSLocalNetworkUsageDescription" = "本应用会连接您网络中的 SIP 电话服务器。";
 "NSContactsUsageDescription" = "联系人会显示在应用中，方便您直接拨打。联系人只保存在您的 iPhone 上，不会上传到任何地方。";
+"NSCameraUsageDescription" = "EzerPhone 只进行语音通话，从不打开相机。由于其所基于的通话库也支持视频，iOS 要求提供这段说明。";

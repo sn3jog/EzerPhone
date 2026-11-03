@@ -1,3 +1,4 @@
 "NSMicrophoneUsageDescription" = "Balss zvaniem pa SIP ir nepieciešama piekļuve mikrofonam.";
 "NSLocalNetworkUsageDescription" = "Lietotne sazinās ar SIP telefonijas serveri jūsu tīklā.";
 "NSContactsUsageDescription" = "Kontakti tiek rādīti lietotnē, lai jūs varētu tiem piezvanīt. Tie paliek jūsu iPhone un netiek nekur sūtīti.";
+"NSCameraUsageDescription" = "EzerPhone veic tikai balss zvanus un nekad neieslēdz kameru. iOS pieprasa šo tekstu, jo zvanu bibliotēka, uz kuras balstīta lietotne, atbalsta arī video.";

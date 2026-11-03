@@ -1,3 +1,4 @@
 "NSMicrophoneUsageDescription" = "SIPによる音声通話にはマイクへのアクセスが必要です。";
 "NSLocalNetworkUsageDescription" = "アプリはネットワーク上のSIP電話サーバーと通信します。";
 "NSContactsUsageDescription" = "連絡先はアプリ内に表示され、そこから発信できます。連絡先はiPhone内にとどまり、外部に送信されることはありません。";
+"NSCameraUsageDescription" = "EzerPhoneは音声通話専用で、カメラを起動することはありません。基盤となる通話ライブラリがビデオにも対応しているため、iOSがこの説明を求めています。";
