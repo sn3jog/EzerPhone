@@ -25,6 +25,9 @@ final class LinphoneManager: NSObject, ObservableObject {
 
     /// What is currently registered, so an unchanged set can refresh in place.
     private var registeredAccounts: [SipAccount] = []
+    /// The passwords those accounts were registered with. They live in the Keychain, not in
+    /// `SipAccount`, so without this a new password left the old one in use.
+    private var registeredPasswords: [UUID: String] = [:]
 
     /// Aggregate state for the simple status banner: best state wins.
     var registrationState: RegState {
@@ -127,10 +130,12 @@ final class LinphoneManager: NSObject, ObservableObject {
     #endif
 
     func register(accounts: [SipAccount], settingsStore: SipSettings) {
+        var passwords: [UUID: String] = [:]
+        for account in accounts { passwords[account.id] = settingsStore.password(for: account.id) }
         // Rebuilding destroys every Account object, and any call riding on one
         // dies with it. The re-knock timer, foreground and path changes all land
         // here, so refresh instead whenever the set is unchanged.
-        if accounts == registeredAccounts, !linphoneAccountsById.isEmpty {
+        if accounts == registeredAccounts, passwords == registeredPasswords, !linphoneAccountsById.isEmpty {
             core.refreshRegisters()
             return
         }
@@ -147,7 +152,7 @@ final class LinphoneManager: NSObject, ObservableObject {
 
         for account in accounts {
             guard account.enabled, account.isValid else { continue }
-            let password = settingsStore.password(for: account.id)
+            let password = passwords[account.id] ?? ""
             guard !password.isEmpty else { continue }
             do {
                 let transport: TransportType = account.transportIsTLS ? .Tls : .Udp
@@ -189,11 +194,13 @@ final class LinphoneManager: NSObject, ObservableObject {
             }
         }
         registeredAccounts = accounts
+        registeredPasswords = passwords
     }
 
     func unregister() {
         core.clearAccounts()
         registeredAccounts = []
+        registeredPasswords = [:]
         linphoneAccountsById.removeAll()
         accountIdByObjectId.removeAll()
         accountsById.removeAll()
