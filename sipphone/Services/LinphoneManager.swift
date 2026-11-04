@@ -76,6 +76,13 @@ final class LinphoneManager: NSObject, ObservableObject {
 
             core = try factory.createCore(configPath: "", factoryConfigPath: "", systemContext: nil)
             core.autoIterateEnabled = false // we drive iterate() ourselves so timing is explicit
+            // The SDK's built-in root CA path is the one on the machine it was built on
+            // (/opt/homebrew/...), which doesn't exist on a phone, so TLS had nothing to
+            // check server certificates against. The same CA list ships inside linphone.framework.
+            if let rootCa = Bundle.main.privateFrameworksURL?.appendingPathComponent("linphone.framework/rootca.pem"),
+               FileManager.default.fileExists(atPath: rootCa.path) {
+                core.rootCa = rootCa.path
+            }
             // Without this, the SDK rejects our CallKit didActivate/didDeactivate
             // audio session signals ("not in Callkit mode: application mistake")
             // and never opens the mic/speaker on outgoing calls.
