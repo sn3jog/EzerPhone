@@ -1002,7 +1002,9 @@ struct InkField: View {
             .font(.ink(17, .regular, relativeTo: .body))
             .foregroundStyle(Ink.ink)
             .tint(Ink.ink)
-            .keyboardType(keyboard)
+            // A phone with only a Cyrillic, Hebrew or Arabic keyboard can't type a Latin
+            // password otherwise; .asciiCapable brings up a Latin layout for the field.
+            .keyboardType(secure && keyboard == .default ? .asciiCapable : keyboard)
             .textInputAutocapitalization(capitalizes ? .sentences : .never)
             .autocorrectionDisabled()
             .frame(minHeight: 30)

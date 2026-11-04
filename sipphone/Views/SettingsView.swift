@@ -264,7 +264,7 @@ private struct AccountEditView: View {
                     InkSection("SIP-сервер") {
                         InkField(title: "Название (например Работа)", text: $account.label, capitalizes: true)
                         InkRule(seed: 21)
-                        InkField(title: "Домен или IP", text: $account.domain)
+                        InkField(title: "Домен или IP", text: $account.domain, keyboard: .URL)
                         InkRule(seed: 22)
                         InkField(title: "Порт", text: $portText, keyboard: .numberPad)
                             .inkOnChange(of: portText) { newValue in
@@ -275,7 +275,7 @@ private struct AccountEditView: View {
                         InkRule(seed: 24)
                         InkToggleRow(title: "Шифровать звук (SRTP)", isOn: $account.requireSRTP)
                         InkRule(seed: 25)
-                        InkField(title: "Внутренний номер (логин)", text: $account.username)
+                        InkField(title: "Внутренний номер (логин)", text: $account.username, keyboard: .asciiCapable)
                         InkRule(seed: 26)
                         InkField(title: "Пароль", text: $password, secure: true)
                     }

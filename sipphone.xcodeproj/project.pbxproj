@@ -278,7 +278,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 4;
+				CURRENT_PROJECT_VERSION = 5;
 				DEVELOPMENT_TEAM = D29VDXCPL8;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = sipphone/Info.plist;
@@ -307,7 +307,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 4;
+				CURRENT_PROJECT_VERSION = 5;
 				DEVELOPMENT_TEAM = D29VDXCPL8;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = sipphone/Info.plist;
